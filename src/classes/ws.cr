@@ -29,10 +29,6 @@ module SurrealDB
         self.on_message msg
       end
 
-      @ws.on_binary do |msg|
-        puts "on_binary -> #{msg}"
-      end
-
       @ws.on_close do |msg|
         puts "on_close -> #{msg}"
       end
