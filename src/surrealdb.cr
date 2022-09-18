@@ -1,4 +1,3 @@
-require "./client"
 require "./websocket/**"
 require "./http/**"
 require "./exceptions/*"
@@ -15,7 +14,7 @@ module SurrealDB
   end
 
   class Instance
-    @ins : Client
+    @ins : WebSocket | HTTP
 
     def initialize(
       @url : String,

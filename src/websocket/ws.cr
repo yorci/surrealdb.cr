@@ -1,11 +1,10 @@
 require "json"
 require "http/web_socket"
-require "../client"
-require "../model/**"
 require "./emitter"
+require "../model/server"
 
 module SurrealDB
-  class WebSocket < Client
+  class WebSocket 
     @events = Emitter.new
 
     # websocket ping interval
@@ -71,7 +70,7 @@ module SurrealDB
     end
 
     private def on_message(msg : String)
-      data = Model::Server::Return.from_json msg
+      data = WebsocketResponse.from_json msg
       @events.emit(data.id, data)
     end
 

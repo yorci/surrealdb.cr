@@ -1,10 +1,10 @@
-require "../model/**"
+require "../model/server"
 
 module SurrealDB
   extend self
 
   struct Emitter
-    alias Responses = Model::Server::Return
+    alias Responses = WebsocketResponse
     @store = Hash(String, Array(Channel(Responses))).new
 
     def on(id : String, ch : Channel(Responses))
