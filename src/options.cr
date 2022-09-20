@@ -1,7 +1,10 @@
 require "json"
 
-module SurrealDB::Model
-  struct WebsocketResponse
+module SurrealDB
+  alias Data = Nil | Bool | Int64 | Float64 | Char | String | Hash(Any, Any) | Array(Any)
+  alias Responses = WSResponse | HTTPResponse
+
+  struct WSResponse
     include JSON::Serializable
 
     @[JSON::Field(key: "id")]
@@ -14,11 +17,13 @@ module SurrealDB::Model
   struct HTTPResponse
     include JSON::Serializable
 
-    @[JSON::Field(key: "result")]
-    property result : JSON::Any
     @[JSON::Field(key: "time")]
     property time : String
+
     @[JSON::Field(key: "status")]
     property status : String
+
+    @[JSON::Field(key: "result")]
+    property result : JSON::Any
   end
 end
