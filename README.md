@@ -1,6 +1,6 @@
 # surrealdb
 
-The unofficial SurrealDB library for Crystal.
+**[WIP]** The unofficial SurrealDB library for Crystal.
 
 ## Installation
 
@@ -16,15 +16,62 @@ The unofficial SurrealDB library for Crystal.
 
 ## Usage
 
+###  Connection 
 ```crystal
 require "surrealdb"
+
+# FOR HTTP Client
+sdb = SurrealDB.create(
+  url: "http://0.0.0.0:8000/sql",
+  client: SurrealDB::HTTP,
+)
+
+# FOR Websocket Client
+sdb = SurrealDB.create(
+  url: "http://0.0.0.0:8000/rpc",
+  client: SurrealDB::WS,
+)
+
+# Set authorization variables
+sdb.signin "root", "root"
+sdb.use "test", "test"
+
+# Creates a records in a given table 
+sdb.create(
+  "person",
+  {"title" => "Founder & CEO",
+   "name"  => {
+     "first" => "Tobie",
+     "last"  => "Morgan Hitchcock",
+   },
+   "marketing"  => true,
+   "identifier" => SurrealDB.guid,
+  }
+)
+
+# Selects all records in given table  
+sdb.select("person")
+
+# Update a person record with a specific id
+# note `#change` or `#update` both the same for http client
+sdb.update(
+  "person:jaime",
+  {"marketing" => false}
+)
+
+# [WS] Perform a custom advanced query
+sdb.query(
+  "SELECT marketing, count() FROM type::table($tb) GROUP BY marketing",
+  {"tb" => "person"}
+)
+
+# [HTTP] Perform a custom advanced query
+# note: you cannot use query parameter for http client 
+sdb.query(
+  "SELECT marketing, count() FROM person GROUP BY marketing",
+  nil
+)
 ```
-
-TODO: Write usage instructions here
-
-## Development
-
-TODO: Write development instructions here
 
 ## Contributing
 
