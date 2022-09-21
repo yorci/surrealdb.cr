@@ -9,7 +9,7 @@
    ```yaml
    dependencies:
      surrealdb:
-       github: yorci/surrealdb
+       github: yorci/surrealdb.cr
    ```
 
 2. Run `shards install`

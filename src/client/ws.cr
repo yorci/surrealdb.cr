@@ -130,7 +130,7 @@ module SurrealDB
       rescue ex
         data = WSErrorResponse.from_json msg
       end
-      
+
       @events.emit(data.id, data)
     end
   end
