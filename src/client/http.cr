@@ -23,7 +23,7 @@ module SurrealDB
       @headers["Authorization"] = "Basic #{Base64.strict_encode("#{user}:#{pass}")}"
     end
 
-    def use(ns : String, db : String)  : Void
+    def use(ns : String, db : String) : Void
       @headers["NS"] = ns
       @headers["DB"] = db
     end
@@ -83,11 +83,10 @@ module SurrealDB
       res = @client.exec method, endpoint, headers: @headers, body: query
 
       begin
-        Array(HTTPResponse).from_json res.body
+        Array(Response).from_json res.body
       rescue ex
-        HTTPErrorResponse.from_json res.body
+        ErrorResponse.from_json res.body
       end
-
     end
   end
 end

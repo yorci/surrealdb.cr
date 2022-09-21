@@ -5,7 +5,7 @@ module SurrealDB
   class WS < Client
     def initialize(url : String, @ping_timeout : Time::Span = 30.seconds)
       @ws = ::HTTP::WebSocket.new(URI.parse(url.sub("sql", "rpc")))
-      @events = Emitter(WSResponse).new
+      @events = Emitter(WSResponse | WSErrorResponse).new
 
       @ws.on_message do |msg|
         Log.debug { "on_message -> #{msg}" }
@@ -125,7 +125,12 @@ module SurrealDB
     end
 
     private def on_message(msg : String)
-      data = WSResponse.from_json msg
+      begin
+        data = WSResponse.from_json msg
+      rescue ex
+        data = WSErrorResponse.from_json msg
+      end
+      
       @events.emit(data.id, data)
     end
   end

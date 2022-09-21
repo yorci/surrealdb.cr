@@ -71,6 +71,21 @@ sdb.query(
   "SELECT marketing, count() FROM person GROUP BY marketing",
   nil
 )
+
+# [WS] Perform a custom advanced query
+# this will return *WSErrorResponse* 
+sdb.query(
+  "SELECT marketing, counr() FROM type::table($tb) GROUP BY marketing",
+  {"tb" => "person"}
+)
+
+# [HTTP] Perform a custom advanced query
+# note: you cannot use query parameter for http client
+# this will return *HTTPErrorResponse* 
+sdb.query(
+  "SELECT marketing, counr() FROM person GROUP BY marketing",
+  nil
+)
 ```
 
 ## Contributing
