@@ -26,4 +26,21 @@ module SurrealDB
     @[JSON::Field(key: "result")]
     property result : JSON::Any
   end
+
+  struct HTTPErrorResponse
+    include JSON::Serializable
+
+    @[JSON::Field(key: "code")]
+    property code : Int32
+
+    @[JSON::Field(key: "details")]
+    property details : String
+
+    @[JSON::Field(key: "description")]
+    property description : String
+
+    @[JSON::Field(key: "information")]
+    property information : String
+    
+  end
 end

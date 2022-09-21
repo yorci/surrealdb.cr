@@ -19,11 +19,11 @@ module SurrealDB
       self.signin user, pass
     end
 
-    def signin(user : String, pass : String)
+    def signin(user : String, pass : String) : Void
       @headers["Authorization"] = "Basic #{Base64.strict_encode("#{user}:#{pass}")}"
     end
 
-    def use(ns : String, db : String)
+    def use(ns : String, db : String)  : Void
       @headers["NS"] = ns
       @headers["DB"] = db
     end
@@ -81,7 +81,13 @@ module SurrealDB
 
     private def request(method : String, endpoint : String, query : String?)
       res = @client.exec method, endpoint, headers: @headers, body: query
-      pp! res, @headers, endpoint, query
+
+      begin
+        Array(HTTPResponse).from_json res.body
+      rescue ex
+        HTTPErrorResponse.from_json res.body
+      end
+
     end
   end
 end
