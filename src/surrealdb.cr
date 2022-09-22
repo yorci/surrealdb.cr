@@ -1,4 +1,4 @@
-require "./options"
+require "./types"
 require "./client"
 
 module SurrealDB
