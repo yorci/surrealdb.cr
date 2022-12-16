@@ -149,7 +149,7 @@ module SurrealDB
     def emit(id : String, data : T)
       @store[id].each do |ch|
         ch.send data
-      end
+      end if @store[id]?
     end
 
     def removeAllListeners(id : String)
