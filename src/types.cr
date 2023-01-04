@@ -1,7 +1,7 @@
 require "json"
 
 module SurrealDB
-  alias Data = Nil | Bool | Int64 | Float64 | Char | String | Hash(Data, Data) | Array(Data)
+  alias Data = Nil | Bool | Int64 | Float64 | Char | String | Hash(Data, Data) | Array(Data) | JSON::Any
 
   struct WSResponse
     include JSON::Serializable
