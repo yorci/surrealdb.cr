@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Start SurrealDB
-        using: docker
+        uses: docker
         run: docker run -it -d --rm --name surrealdb -p 8000:8000 surrealdb/surrealdb start -u root -p root
       - run: crystal --version
       - run: shards install
