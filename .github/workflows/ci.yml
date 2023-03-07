@@ -16,29 +16,25 @@ jobs:
   specs:
     runs-on: ubuntu-latest
     container: crystallang/crystal:latest
-    services:
-      surreal-db:
-        image: surrealdb/surrealdb
-        ports:
-          - 8000:8000
-        options: >-
-          --user root
-          --pass root
     permissions:
       contents: read
       pull-requests: read
     steps:
-    - uses: actions/checkout@v3
-    - run: crystal --version
-    - run: shards install
-    - name: specs
-      env:
-        SURREALDB_URL: http://localhost:8000/sql
-      run: crystal spec --error-on-warnings
+      - uses: actions/checkout@v3
+      - name: Start SurrealDB
+        run: docker run -it -d --rm --name surrealdb -p 8000:8000 surrealdb/surrealdb start -u root -p root
+      - run: crystal --version
+      - run: shards install
+      - name: specs
+        env:
+          SURREALDB_URL: http://localhost:8000/sql
+        run: crystal spec --error-on-warnings
+      - name: Stop SurrealDB
+        run: docker stop -t 1 surrealdb
 
   check_format:
     runs-on: ubuntu-latest
     container: crystallang/crystal:latest-alpine
     steps:
-    - uses: actions/checkout@v3
-    - run: crystal tool format --check
+      - uses: actions/checkout@v3
+      - run: crystal tool format --check
