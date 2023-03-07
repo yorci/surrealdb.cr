@@ -30,4 +30,17 @@ jobs:
         env:
           SURREALDB_URL: http://localhost:8000/sql
         run: crystal spec --error-on-warnings
+        
+  check_format:
+    strategy:
+      fail-fast: false
+      matrix:
+        crystal: [latest, nightly, 0.35.1]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: crystal-lang/install-crystal@v1
+        with:
+          crystal: ${{matrix.crystal}}
+      - run: crystal --version
       - run: crystal tool format --check
