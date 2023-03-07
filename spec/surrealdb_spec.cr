@@ -3,7 +3,7 @@ require "../src/surrealdb"
 
 guid = SurrealDB.guid
 sdb = SurrealDB.create(
-  url: "http://0.0.0.0:8000/sql",
+  url: ENV.fetch("SURREALDB_URL", "http://0.0.0.0:8000/sql"),
   client: SurrealDB::HTTP,
 )
 
