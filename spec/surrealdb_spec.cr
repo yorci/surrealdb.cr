@@ -15,7 +15,6 @@ describe SurrealDB do
   it "auth" do
     sdb.signin "root", "root"
     sdb.use "test", "test"
-    true.should be_true 
   end
 
   it "create" do

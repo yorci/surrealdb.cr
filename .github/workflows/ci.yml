@@ -15,10 +15,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - {os: ubuntu-latest, crystal: latest}
-          - {os: ubuntu-latest, crystal: nightly}
-    runs-on: ${{matrix.os}}
+        crystal: [latest, nightly, 0.35.1]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Start SurrealDB
