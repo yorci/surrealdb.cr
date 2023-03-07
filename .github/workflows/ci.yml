@@ -2,7 +2,7 @@ name: CI
 
 on:
   schedule:
-    - cron: "0 20 * * 1" # Midnight monday
+    - cron: "0 20 * * 1"
   push:
     tags:
       - v*
@@ -22,8 +22,8 @@ jobs:
         ports:
           - 8000:8000
         options: >-
-          -u root
-          -p root
+          --user root
+          --pass root
     permissions:
       contents: read
       pull-requests: read
