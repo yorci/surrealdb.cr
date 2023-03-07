@@ -13,7 +13,7 @@ on:
 jobs:
   specs:
     runs-on: ubuntu-latest
-    container: crystallang/crystal:latest
+    # container: crystallang/crystal:latest
     steps:
       - uses: actions/checkout@v3
       - name: Start SurrealDB
