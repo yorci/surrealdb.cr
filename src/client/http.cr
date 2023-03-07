@@ -8,7 +8,7 @@ module SurrealDB
 
     def initialize(url : String)
       @client = ::HTTP::Client.new(URI.parse(url))
-      @headers = ::HTTP::Headers{"Content-Type" => "application/json"}
+      @headers = ::HTTP::Headers{"Content-Type" => "application/json", "Accept" => "application/json"}
     end
 
     def authenticate(user : String, pass : String)
