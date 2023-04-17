@@ -1,6 +1,15 @@
 # surrealdb
 
-**[WIP]** The unofficial SurrealDB library for Crystal.
+The unofficial SurrealDB library for Crystal.
+
+
+## Todo
+
+- [x] HTTP client tests
+- [ ] Websocket client tests
+
+*Contributions are welcome*
+
 
 ## Installation
 
