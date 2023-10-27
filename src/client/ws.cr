@@ -41,7 +41,7 @@ module SurrealDB
 
       spawn do
         Log.debug { "+closing" }
-        @ws.close(HTTP::WebSocket::CloseCode.NormalClosure)
+        @ws.close(::HTTP::WebSocket::CloseCode::NormalClosure)
       end
     end
 
