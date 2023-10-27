@@ -36,6 +36,15 @@ module SurrealDB
       end
     end
 
+    def close
+      Log.debug { "+close" }
+
+      spawn do
+        Log.debug { "+closing" }
+        @ws.close(HTTP::WebSocket::CloseCode.NormalClosure)
+      end
+    end
+
     def authenticate(user : String = "root", pass : String = "root")
       self.signin(user, pass)
     end
