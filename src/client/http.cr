@@ -45,11 +45,7 @@ module SurrealDB
       self.send "PUT", table, params
     end
 
-    def change(table : String, params : Data)
-      self.update table, params
-    end
-
-    def modify(table : String, params : Data)
+    def merge(table : String, params : Data)
       self.send "PATCH", table, params
     end
 

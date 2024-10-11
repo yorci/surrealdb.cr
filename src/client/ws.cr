@@ -77,12 +77,8 @@ module SurrealDB
       self.send("update", [table, params])
     end
 
-    def change(table : String, params : Data)
-      self.send("change", [table, params])
-    end
-
-    def modify(table : String, params : Data)
-      self.send("modify", [table, params])
+    def merge(table : String, params : Data)
+      self.send("merge", [table, params])
     end
 
     #

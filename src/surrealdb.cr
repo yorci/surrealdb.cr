@@ -2,7 +2,7 @@ require "./types"
 require "./client"
 
 module SurrealDB
-  VERSION = "0.1.0"
+  VERSION = "0.1.1"
   Log     = ::Log.for("surrealdb")
 
   def self.guid : String
