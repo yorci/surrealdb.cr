@@ -1,3 +1,9 @@
+
+> [!WARNING]
+> This library only works with SurrealDB 1.x and does not support SurrealDB 2.x. 
+> Due to SurrealDB's future plans, we first need a CBOR RFC 8949 codec for Crystal to support SurrealDB v2.x.
+
+
 # surrealdb
 
 The unofficial SurrealDB library for Crystal.
